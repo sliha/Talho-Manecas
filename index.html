@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talho Manecas – Carnes de Qualidade em Braga</title>
+<meta name="description" content="Talho Manecas – Carnes frescas e produtos de qualidade premium em Braga. Encomende online com levantamento em loja.">
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-inner">
+    <a href="#home" class="logo-link" onclick="navigate('home')">
+      <img src="logo.png" alt="Talho Manecas" class="logo-img">
+    </a>
+    <nav class="nav-desktop">
+      <a onclick="navigate('home')">Início</a>
+      <a onclick="navigate('produtos')">Produtos</a>
+      <a onclick="navigate('encomendas')">Encomendas</a>
+      <a onclick="navigate('lojas')">Lojas</a>
+      <a onclick="navigate('contactos')">Contactos</a>
+    </nav>
+    <button class="cart-btn" onclick="openCart()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-mobile" id="navMobile">
+    <a onclick="navigate('home');toggleMenu()">Início</a>
+    <a onclick="navigate('produtos');toggleMenu()">Produtos</a>
+    <a onclick="navigate('encomendas');toggleMenu()">Encomendas</a>
+    <a onclick="navigate('lojas');toggleMenu()">Lojas</a>
+    <a onclick="navigate('contactos');toggleMenu()">Contactos</a>
+  </nav>
+</header>
+
+<!-- PAGES -->
+<main id="app">
+
+<!-- HOME -->
+<section id="page-home" class="page active">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80" alt="Carnes de qualidade" class="hero-bg" onerror="this.src='https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&w=1600'">
+    <div class="hero-content">
+      <p class="hero-tag">Talho Premium em Braga</p>
+      <h1>Carnes de Qualidade<br>em Braga</h1>
+      <p class="hero-sub">Seleção rigorosa, cortes frescos e atendimento de excelência desde sempre.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="navigate('produtos')">Ver Produtos</button>
+        <button class="btn-outline" onclick="navigate('encomendas')">Fazer Encomenda</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFERENCIAIS -->
+  <div class="section-light">
+    <div class="container">
+      <h2 class="section-title">Porque escolher o Talho Manecas?</h2>
+      <div class="grid-4">
+        <div class="card-feat">
+          <div class="feat-icon">🥩</div>
+          <h3>Carne Fresca</h3>
+          <p>Produto fresco todos os dias, selecionado dos melhores fornecedores nacionais.</p>
+        </div>
+        <div class="card-feat">
+          <div class="feat-icon">🏆</div>
+          <h3>Qualidade Premium</h3>
+          <p>Mais de 30 anos de experiência garantem os melhores cortes para a sua mesa.</p>
+        </div>
+        <div class="card-feat">
+          <div class="feat-icon">🚀</div>
+          <h3>Encomenda Online</h3>
+          <p>Encomende online e levante na loja mais próxima sem filas de espera.</p>
+        </div>
+        <div class="card-feat">
+          <div class="feat-icon">📍</div>
+          <h3>3 Lojas em Braga</h3>
+          <p>Quinta da Capela, Lamaçães e Celeirós — sempre perto de si.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUTOS DESTAQUE -->
+  <div class="section-dark">
+    <div class="container">
+      <h2 class="section-title white">Os Nossos Produtos</h2>
+      <div class="grid-3" id="homeProducts"></div>
+      <div style="text-align:center;margin-top:2rem">
+        <button class="btn-primary" onclick="navigate('produtos')">Ver Todos os Produtos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="container">
+      <h2>Pronto para encomendar?</h2>
+      <p>Escolha os seus produtos, adicione ao carrinho e levante na loja da sua preferência.</p>
+      <button class="btn-white" onclick="navigate('encomendas')">Fazer Encomenda Agora</button>
+    </div>
+  </div>
+
+</section>
+
+<!-- PRODUTOS -->
+<section id="page-produtos" class="page">
+  <div class="page-hero-small">
+    <h1>Os Nossos Produtos</h1>
+    <p>Carnes frescas, congelados e vinhos selecionados</p>
+  </div>
+  <div class="container" style="padding:3rem 1rem">
+    <div class="category-tabs">
+      <button class="tab active" onclick="filterProducts('todas',this)">Todos</button>
+      <button class="tab" onclick="filterProducts('fresca',this)">Carnes Frescas</button>
+      <button class="tab" onclick="filterProducts('congelado',this)">Congelados</button>
+      <button class="tab" onclick="filterProducts('vinho',this)">Vinhos</button>
+    </div>
+    <div class="grid-3" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ENCOMENDAS -->
+<section id="page-encomendas" class="page">
+  <div class="page-hero-small">
+    <h1>Encomendas Online</h1>
+    <p>Encomende online com levantamento em loja</p>
+  </div>
+
+  <div class="container encomendas-layout">
+
+    <!-- INFO BANNER -->
+    <div class="info-banner">
+      <span>📦</span>
+      <div>
+        <strong>Como funciona?</strong>
+        <p>Selecione os produtos, adicione ao carrinho e finalize a encomenda. Após confirmação, levante na loja escolhida no horário que preferir. Sem taxas de entrega.</p>
+      </div>
+    </div>
+
+    <div class="encomendas-grid">
+      <!-- LISTA DE PRODUTOS -->
+      <div>
+        <h2 class="section-title-sm">Escolha os Produtos</h2>
+        <div id="orderProductList"></div>
+      </div>
+
+      <!-- CARRINHO -->
+      <div class="cart-panel" id="cartPanel">
+        <h2 class="section-title-sm">🛒 O Seu Carrinho</h2>
+        <div id="cartItems">
+          <p class="empty-cart">O carrinho está vazio.</p>
+        </div>
+        <div id="cartSummary" class="cart-summary hidden">
+          <div class="cart-total">
+            <span>Total estimado:</span>
+            <span id="cartTotal">€0.00</span>
+          </div>
+
+          <!-- LOJA -->
+          <div class="form-group">
+            <label>Levantar em:</label>
+            <select id="pickupStore">
+              <option value="">Escolha a loja</option>
+              <option value="quinta">Quinta da Capela</option>
+              <option value="lamacaes">Lamaçães</option>
+              <option value="celeiros">Celeirós</option>
+            </select>
+          </div>
+
+          <!-- PAGAMENTO -->
+          <div class="payment-section">
+            <h3>Forma de Pagamento</h3>
+            <div class="payment-tabs">
+              <button class="pay-tab active" onclick="selectPayment('card',this)">💳 Cartão</button>
+              <button class="pay-tab" onclick="selectPayment('mbway',this)">📱 MBWay</button>
+            </div>
+
+            <div id="payCard" class="pay-form">
+              <div class="form-group">
+                <label>Número do Cartão</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Validade</label>
+                  <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5" oninput="formatExpiry(this)">
+                </div>
+                <div class="form-group">
+                  <label>CVV</label>
+                  <input type="text" id="cardCvv" placeholder="123" maxlength="3">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Nome no Cartão</label>
+                <input type="text" id="cardName" placeholder="Nome completo">
+              </div>
+            </div>
+
+            <div id="payMbway" class="pay-form hidden">
+              <div class="form-group">
+                <label>Número de Telemóvel</label>
+                <input type="tel" id="mbwayPhone" placeholder="9XX XXX XXX" maxlength="12">
+              </div>
+              <p class="mbway-info">Receberá uma notificação MBWay para confirmar o pagamento na loja.</p>
+            </div>
+          </div>
+
+          <button class="btn-primary full-width" onclick="finalizeOrder()">Finalizar Encomenda</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOJAS -->
+<section id="page-lojas" class="page">
+  <div class="page-hero-small">
+    <h1>As Nossas Lojas</h1>
+    <p>3 lojas em Braga para o servir melhor</p>
+  </div>
+  <div class="container" style="padding:3rem 1rem">
+    <div class="stores-grid">
+
+      <div class="store-card">
+        <div class="store-number">01</div>
+        <h3>Quinta da Capela</h3>
+        <p class="store-address">R. Dr. Francisco Machado Owen, 8<br>Braga</p>
+        <a href="tel:253214440" class="store-phone">📞 253 214 440</a>
+        <div class="store-hours">
+          <strong>Horário</strong>
+          <span>Seg–Sex: 8h–19h30</span>
+          <span>Sáb: 8h–13h</span>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3028.5!2d-8.43!3d41.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDMzJzAwLjAiTiA4wrAyNSc0OC4wIlc!5e0!3m2!1spt!2spt!4v1680000000000!5m2!1spt!2spt" width="100%" height="200" style="border:0;border-radius:8px" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="store-actions">
+          <a href="tel:253214440" class="btn-sm-primary">📞 Ligar</a>
+          <a href="https://wa.me/351253214440" target="_blank" class="btn-sm-green">💬 WhatsApp</a>
+          <a href="https://maps.google.com/?q=R.+Dr.+Francisco+Machado+Owen,+8+Braga" target="_blank" class="btn-sm-outline">📍 Ver Mapa</a>
+        </div>
+      </div>
+
+      <div class="store-card">
+        <div class="store-number">02</div>
+        <h3>Lamaçães</h3>
+        <p class="store-address">Av. Dr. António Palha<br>Braga</p>
+        <a href="tel:253619358" class="store-phone">📞 253 619 358</a>
+        <div class="store-hours">
+          <strong>Horário</strong>
+          <span>Seg–Sex: 8h–19h30</span>
+          <span>Sáb: 8h–13h</span>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3028.5!2d-8.44!3d41.56!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDMzJzM2LjAiTiA4wrAyNiwyNC4wIlc!5e0!3m2!1spt!2spt!4v1680000000001!5m2!1spt!2spt" width="100%" height="200" style="border:0;border-radius:8px" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="store-actions">
+          <a href="tel:253619358" class="btn-sm-primary">📞 Ligar</a>
+          <a href="https://wa.me/351253619358" target="_blank" class="btn-sm-green">💬 WhatsApp</a>
+          <a href="https://maps.google.com/?q=Av.+Dr.+António+Palha+Braga" target="_blank" class="btn-sm-outline">📍 Ver Mapa</a>
+        </div>
+      </div>
+
+      <div class="store-card">
+        <div class="store-number">03</div>
+        <h3>Celeirós</h3>
+        <p class="store-address">Av. de São Lourenço, 78<br>Celeirós, Braga</p>
+        <a href="tel:253693510" class="store-phone">📞 253 693 510</a>
+        <div class="store-hours">
+          <strong>Horário</strong>
+          <span>Seg–Sex: 8h–19h30</span>
+          <span>Sáb: 8h–13h</span>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3028.5!2d-8.46!3d41.57!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDM0JzEyLjAiTiA4wrAyNyczNi4wIlc!5e0!3m2!1spt!2spt!4v1680000000002!5m2!1spt!2spt" width="100%" height="200" style="border:0;border-radius:8px" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="store-actions">
+          <a href="tel:253693510" class="btn-sm-primary">📞 Ligar</a>
+          <a href="https://wa.me/351253693510" target="_blank" class="btn-sm-green">💬 WhatsApp</a>
+          <a href="https://maps.google.com/?q=Av.+de+São+Lourenço,+78+Celeirós+Braga" target="_blank" class="btn-sm-outline">📍 Ver Mapa</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTOS -->
+<section id="page-contactos" class="page">
+  <div class="page-hero-small">
+    <h1>Contactos</h1>
+    <p>Estamos aqui para o ajudar</p>
+  </div>
+  <div class="container" style="padding:3rem 1rem">
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <h2>Fale Connosco</h2>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <strong>Email</strong>
+            <a href="mailto:talhomanecas@gmail.com">talhomanecas@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <strong>Quinta da Capela</strong>
+            <a href="tel:253214440">253 214 440</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <strong>Lamaçães</strong>
+            <a href="tel:253619358">253 619 358</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <strong>Celeirós</strong>
+            <a href="tel:253693510">253 693 510</a>
+          </div>
+        </div>
+        <div class="contact-btns">
+          <a href="tel:253214440" class="btn-primary">📞 Ligar Agora</a>
+          <a href="https://wa.me/351253214440?text=Olá,%20gostaria%20de%20fazer%20uma%20encomenda" target="_blank" class="btn-whatsapp">💬 WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h2>Envie uma Mensagem</h2>
+        <form class="contact-form" onsubmit="submitContact(event)">
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" placeholder="O seu nome" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="o.seu@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Telefone</label>
+            <input type="tel" placeholder="9XX XXX XXX">
+          </div>
+          <div class="form-group">
+            <label>Mensagem</label>
+            <textarea rows="5" placeholder="Como podemos ajudar?" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary full-width">Enviar Mensagem</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.png" alt="Talho Manecas" height="60">
+      <p>Carnes de qualidade premium<br>em Braga desde sempre.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7">📧 talhomanecas@gmail.com</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <a onclick="navigate('home')">Início</a>
+      <a onclick="navigate('produtos')">Produtos</a>
+      <a onclick="navigate('encomendas')">Encomendas</a>
+      <a onclick="navigate('lojas')">Lojas</a>
+      <a onclick="navigate('contactos')">Contactos</a>
+    </div>
+    <div class="footer-links">
+      <h4>As Nossas Lojas</h4>
+      <a href="tel:253214440">Quinta da Capela – 253 214 440</a>
+      <a href="tel:253619358">Lamaçães – 253 619 358</a>
+      <a href="tel:253693510">Celeirós – 253 693 510</a>
+    </div>
+    <div class="footer-links">
+      <h4>Horário</h4>
+      <span>Seg – Sex: 8h00 – 19h30</span>
+      <span>Sábado: 8h00 – 13h00</span>
+      <span>Domingo: Encerrado</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Talho Manecas – Todos os direitos reservados</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/351253214440?text=Olá,%20gostaria%20de%20fazer%20uma%20encomenda" target="_blank" class="whatsapp-float" title="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" width="28" height="28" fill="white"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.736 5.469 2.024 7.773L0 32l8.456-2.007A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.32 22.4c-.347.96-1.76 1.76-2.827 1.973-.747.147-1.72.267-4.987-1.067-4.187-1.68-6.88-5.907-7.093-6.187-.2-.267-1.68-2.24-1.68-4.267 0-2.027 1.04-3.013 1.44-3.44.347-.373.907-.547 1.44-.547.174 0 .333.013.48.02.427.02.64.04.92.707.347.827 1.187 2.853 1.293 3.067.107.213.213.493.067.773-.133.293-.253.427-.467.667-.213.24-.413.427-.627.68-.2.227-.413.467-.173.893.24.413 1.08 1.787 2.333 2.893 1.6 1.427 2.88 1.88 3.36 2.08.36.147.787.107 1.04-.16.32-.347.707-.92 1.107-1.493.28-.4.627-.453 1-.307.387.133 2.427 1.147 2.84 1.36.413.213.693.32.8.493.093.187.093 1.067-.253 2.08z"/></svg>
+</a>
+
+<!-- CHAT ASSISTENTE -->
+<div class="chat-widget" id="chatWidget">
+  <button class="chat-toggle" onclick="toggleChat()" title="Assistente Virtual">
+    <svg id="chatIconOpen" viewBox="0 0 24 24" width="24" height="24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg>
+    <svg id="chatIconClose" viewBox="0 0 24 24" width="24" height="24" fill="white" style="display:none"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+  </button>
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">
+      <img src="logo.png" alt="Manecas" height="30">
+      <div>
+        <strong>Assistente Manecas</strong>
+        <span class="online-dot">● Online</span>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">Olá! 👋 Bem-vindo ao Talho Manecas. Como posso ajudar?</div>
+      <div class="chat-suggestions">
+        <button onclick="sendSuggestion('Ver produtos disponíveis')">🥩 Ver produtos</button>
+        <button onclick="sendSuggestion('Como fazer uma encomenda?')">📦 Encomendas</button>
+        <button onclick="sendSuggestion('Onde ficam as lojas?')">📍 Lojas</button>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Escreva a sua mensagem..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button onclick="sendChat()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h3>🛒 Carrinho</h3>
+    <button onclick="closeCart()">✕</button>
+  </div>
+  <div id="cartDrawerItems"></div>
+  <div id="cartDrawerFooter" class="cart-drawer-footer hidden">
+    <div class="cart-total">
+      <span>Total:</span>
+      <span id="cartDrawerTotal">€0.00</span>
+    </div>
+    <button class="btn-primary full-width" onclick="closeCart();navigate('encomendas')">Finalizar Encomenda</button>
+  </div>
+</div>
+
+<!-- MODAL SUCESSO -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon">✅</div>
+    <h2>Encomenda Realizada com Sucesso!</h2>
+    <p>Levantamento em loja conforme selecionado.</p>
+    <p style="margin-top:0.5rem;font-size:0.9rem;opacity:0.7">Receberá uma confirmação no seu contacto.</p>
+    <button class="btn-primary" onclick="closeModal()">Voltar ao Início</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
